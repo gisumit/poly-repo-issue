@@ -1,13 +1,25 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 <dom-module id="poly-repo-issue-app">
   <template>
     <style>
       :host {
         display: block;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
       }
     </style>
-    <h2>Hello [[prop1]]</h2>
+    <iron-ajax
+      auto
+      url="{{url}}"
+      handle-as="json"
+      last-response="{{response}}"></iron-ajax>
+
+      <template is="dom-repeat" items="{{response}}">
+        <div>
+          <a href="{{item.html_url}}">{{item.title}}</a>
+        </div>
+      </template>
   </template>
 
   <script>
@@ -16,11 +28,36 @@
       is: 'poly-repo-issue-app',
 
       properties: {
-        prop1: {
-          type: String,
-          value: 'poly-repo-issue-app',
+        owner: {
+          value: 'polymer',
+          notify: true
         },
+        repo: {
+          value: 'polymer',
+          notify: true
+        },
+        state: {
+          value: 'open',
+          notify: true
+        },
+        page: {
+          value: 1,
+          notify: true
+        },
+        options: {
+          computed: 'computedOptions(state, page)'
+        },
+        url: {
+          computed: 'computedUrl(owner, repo)'
+        }
       },
+      computedUrl: function (owner, repo) {
+        return ['https://api.github.com/repos',owner, repo,'issues'].join('/');
+        // return [`https://api.github.com/repos/${owner}/${repo}/issues`]
+      },
+      computedOptions: function (state, page) {
+        return {state: state, page: page};
+      }
 
     });
   </script>
