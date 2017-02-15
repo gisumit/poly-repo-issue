@@ -1,0 +1,28 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1,user-scalable=yes">
+
+    <title>poly-repo-issue</title>
+    <meta name="description" content="poly-repo-issue description">
+
+    
+    <link rel="manifest" href="/manifest.json">
+
+    <script src="./bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="./src/poly-repo-issue-app/poly-repo-issue-app.html">
+  </head>
+  <body unresolved="">
+    <template is="dom-bind">
+      <input type="text" value="{{owner::change}}">
+      <input type="text" value="{{repo::change}}">
+      <input type="text" value="{{state::change}}">
+      <input type="number" value="{{page::change}}">
+      <poly-repo-issue-app owner="{{owner}}" repo="{{repo}}" state="{{state}}" page="{{page}}"></poly-repo-issue-app>
+
+    </template>
+
+
+  
+
+</body></html>
