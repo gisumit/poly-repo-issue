@@ -1,5 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/iron-swipeable-container/iron-swipeable-container.html">
+
 <dom-module id="poly-repo-issue-app">
   <template>
     <style>
@@ -7,6 +9,29 @@
         display: block;
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
+      }
+      .card {
+        padding: 10px 20px;
+        box-shadow: 0 3px 4px rgba(0,0,0,.25);
+        border: 1px solid #fafafa;
+        border-radius: 3px;
+        margin: 25px auto;
+        user-select: none;
+        width: 80%;
+        max-width: 500px;
+        font-family: 'roboto';
+        text-decoration: none !important;
+        font-size: 1.5rem;
+        display: -webkit-flex;
+        display: -ms-flex;
+        display: flex;
+
+        align-items: center;
+      }
+      a {
+        text-decoration: none;
+        color: #3F51B5;
+        text-decoration: none;
       }
     </style>
     <iron-ajax
@@ -16,9 +41,11 @@
       last-response="{{response}}"></iron-ajax>
 
       <template is="dom-repeat" items="{{response}}">
-        <div>
-          <a href="{{item.html_url}}">{{item.title}}</a>
-        </div>
+        <iron-swipeable-container>
+            <div class="card">
+              <a href="{{item.html_url}}">{{item.title}}</a>
+            </div>
+        </iron-swipeable-container>
       </template>
   </template>
 
